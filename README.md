@@ -1,6 +1,6 @@
 # Synchronous FIFO: RTL + Python-based Verification
 
-![verify](https://github.com/<your-username>/fifo-verify/actions/workflows/ci.yml/badge.svg)
+![verify](https://github.com/Ayu-Pyramid/fifo-verify/actions/workflows/ci.yml/badge.svg)
 
 A parameterized synchronous FIFO in Verilog, verified with a cocotb (Python)
 testbench using a reference model, a scoreboard, constrained-random stimulus,
