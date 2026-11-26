@@ -1,0 +1,6 @@
+tests/sim_build/
+tests/results.xml
+tests/*.vcd
+tests/coverage.yml
+__pycache__/
+.pytest_cache/
