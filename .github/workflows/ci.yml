@@ -1,0 +1,29 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  sim:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install tools
+        run: |
+          sudo apt-get update && sudo apt-get install -y iverilog
+          pip install -r requirements.txt
+      - name: Model unit tests
+        run: cd tests && pytest -q test_model.py
+      - name: cocotb simulation (directed + random + coverage)
+        run: cd tests && make
+      - name: Mutation tests
+        run: cd tests && python3 run_mutants.py
+      - name: Fail on any cocotb failure
+        run: "! grep -q '<failure' tests/results.xml"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sim-results
+          path: |
+            tests/results.xml
+            tests/coverage.yml
