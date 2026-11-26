@@ -16,8 +16,6 @@ jobs:
         run: cd tests && pytest -q test_model.py
       - name: cocotb simulation (directed + random + coverage)
         run: cd tests && make
-      - name: Mutation tests
-        run: cd tests && python3 run_mutants.py
       - name: Fail on any cocotb failure
         run: "! grep -q '<failure' tests/results.xml"
       - uses: actions/upload-artifact@v4
@@ -27,3 +25,5 @@ jobs:
           path: |
             tests/results.xml
             tests/coverage.yml
+      - name: Mutation tests
+        run: cd tests && python3 run_mutants.py
